@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:25:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/11 21:38:58 by kko              ###   ########.fr       */
+/*   Updated: 2022/12/30 17:26:22 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,13 +234,38 @@ t_token			*prev_token(t_token *token);
 void			select_oper(t_token *tok, t_oper_type *oper1, \
 t_oper_type *oper2, t_oper_type *oper3);
 
-//wildcard
-int				expansion_wild(t_token *tok);
-
 //wildcard_dir
 int				cnt_pwd(t_token *tok, char **pwd);
 int				cnt_cmd(char **cmd);
 int				check_wild(char *s);
 DIR				*opendir_util(char *pwd, t_token *tok);
+
+//wildcard
+int				write_dir(struct dirent *file, DIR *dir_ptr, char ***src, int i);
+int				write_wild(char ***dst, char ***src, t_token *tok, char *pwd);
+int				what_wild(char **new);
+int				edit_wild(t_token *tok, int cnt, int *i);
+int				free_wild(char *tmp, int ret);
+
+//wildcard2
+char			*set_tok_cmd(t_token *tok, int i);
+void			push_index_com(char *line, int *idx);
+void			jump_redir(char *line, int *idx, int i);
+char			*get_tok_cmd(t_token *tok, int idx);
+int				com_wild(t_token *tok, int idx, char *s);
+
+//wildcard3
+int				is_wild(char *wild_str, char *file_name);
+int 			is_wildsub(char *wild_str, char *file_name, int index);
+int				cnt_cwd_wild(t_token *tok, char *wild_str);
+void			fill_arrs(t_token *tok, char *wild_str, char **arrs);
+char			**make_arrs_with_wild(t_token *tok, char *wild_str);
+
+//wildcard4
+void			other_filling(t_token *tok, int *idx, char ***new, int j);
+char			**filling_cmd(t_token *tok, int *idx, char **tmp, int cnt);
+int				search_edit_wild(t_token *tok, int *i);
+int				wild_type(t_token *tok, int *i);
+int				expansion_wild(t_token *tok);
 
 #endif

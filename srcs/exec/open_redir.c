@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2022/12/30 17:00:09 by kko              ###   ########.fr       */
+/*   Updated: 2022/12/30 17:50:41 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char	*get_prev_line(t_token *tok, int idx)
 	int		i;
 
 	tmp = tok->parent->right->line;
+	i = 0;
 	while (tmp[i] && idx != 0)
 	{
 		if (ft_is_redir(tmp[i]))
@@ -112,7 +113,7 @@ char	*get_prev_line(t_token *tok, int idx)
 		}
 		i++;
 	}
-	while (ft_is_redir(tmp[i]) != NO_DIREC)
+	while (ft_is_redir(tmp[i]) == NO_DIREC)
 		i++;
 	ret = ft_substr(tmp, i, get_index_redir(tmp, i));
 	return (ret);
@@ -137,9 +138,9 @@ int	com_wild_redir(char *tmp)
 char	*ft_redir(char *s)
 {
 	if (ft_is_redir(*s))
-		(*s)++;
+		s++;
 	if (ft_is_redir(*s))
-		(*s)++;
+		s++;
 	return (s);
 }
 
@@ -160,7 +161,11 @@ void	edit_wild_redir(t_token *tok, int idx)
 
 	tmp = get_prev_line(tok, idx);
 	if (com_wild_redir(tmp) == 0)
+	{
+		free(tmp);
 		return ;
+	}
+	free(tmp);
 	if (cnt_cwd_wild(tok, ft_redir(tok->line)) != 1)
 	{
 		tok->err_flag_redir = 2;
@@ -169,7 +174,6 @@ void	edit_wild_redir(t_token *tok, int idx)
 	tmp1 = make_arrs_with_wild(tok, ft_redir(tok->line));
 	change_lien(tok, tmp1);
 	free_cmd(tmp1);
-	free(tmp);
 }
 
 void	expansion_wild_redir(t_token *tok)

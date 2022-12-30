@@ -6,7 +6,7 @@
 #    By: kko <kko@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 15:22:25 by seokchoi          #+#    #+#              #
-#    Updated: 2022/12/30 10:37:03 by kko              ###   ########.fr        #
+#    Updated: 2022/12/30 17:27:03 by kko              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS_PAR= check_list.c check_list2.c check_subshell_redir.c check_wave.c \
 			init_token.c is_type.c key_util.c malloc_utils.c oper_type.c \
 			parse_utility.c push_index_about_comma.c redirection.c \
 			redirection2.c token_list_len.c token_util.c tree_check.c \
-			tree_recursion.c tree_util.c wildcard.c wildcard_dir.c
+			tree_recursion.c tree_util.c wildcard_dir.c wildcard.c \
+			wildcard2.c wildcard3.c wildcard4.c
 SRCS_FREE= free.c utility.c
 SOURCE	= srcs/
 SRC_ENV = srcs/env/

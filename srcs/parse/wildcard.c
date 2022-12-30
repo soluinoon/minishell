@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:45:37 by ko                #+#    #+#             */
-/*   Updated: 2022/12/30 16:24:17 by kko              ###   ########.fr       */
+/*   Updated: 2022/12/30 17:23:56 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	write_dir(struct dirent *file, DIR *dir_ptr, char ***src, int i)
+int	write_dir(struct dirent *file, DIR *dir_ptr, char ***src, int i)
 {
 	int	j;
 
@@ -31,7 +31,7 @@ static int	write_dir(struct dirent *file, DIR *dir_ptr, char ***src, int i)
 	return (j);
 }
 
-static int	write_wild(char ***dst, char ***src, t_token *tok, char *pwd)
+int	write_wild(char ***dst, char ***src, t_token *tok, char *pwd)
 {
 	struct dirent	*file;
 	DIR				*dir_ptr;
@@ -59,7 +59,7 @@ static int	write_wild(char ***dst, char ***src, t_token *tok, char *pwd)
 	return (0);
 }
 
-static int	what_wild(char **new)
+int	what_wild(char **new)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ static int	what_wild(char **new)
 	return (i - 1);
 }
 
-static int	edit_wild(t_token *tok, int cnt, int *i)
+int	edit_wild(t_token *tok, int cnt, int *i)
 {
 	char	**new;
 	char	**tmp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:27 by jihonkim          #+#    #+#             */
-/*   Updated: 2022/12/30 11:53:11 by jihonkim         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:20:46 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,54 @@ char	*set_tok_cmd(t_token *tok, int i)
 	return (ret);
 }
 
+void	push_index_com(char *line, int *idx)
+{
+	t_comma_type	tmp;
+
+	tmp = ft_is_comma(line[*idx]);
+	while (ft_is_comma(line[*idx]) == tmp)
+		(*idx)++;
+	(*idx)--;
+}
+
+void	jump_redir(char *line, int *idx, int i)
+{
+	while (line[*idx] == ' ')
+	{
+		i = 1;
+		(*idx)++;
+	}
+	if (i == 1)
+		(*idx)--;
+	if (ft_is_redir(line[*idx]) == NO_DIREC)
+		return ;
+	(*idx)++;
+	if (ft_is_redir(line[*idx]))
+	{
+		(*idx)++;
+	}
+	while (line[*idx] == ' ')
+		(*idx)++;
+	while (line[*idx] && line[*idx] != ' ')
+	{
+		if (ft_is_comma(line[*idx]))
+			push_index_com(line, idx);
+		(*idx)++;
+	}
+	while (line[*idx] == ' ')
+		(*idx)++;
+}
+
 char	*get_tok_cmd(t_token *tok, int idx)
 {
 	int		i;
 	char	*ret;
 
 	i = 0;
+	jump_redir(tok->line, &i, 0);
 	while (tok->line[i] && idx != 0)
 	{
+		jump_redir(tok->line, &i, 0);
 		if (tok->line[i] == '\"' || tok->line[i] == '\'')
 		{
 			i++;

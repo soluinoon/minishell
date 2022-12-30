@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:19 by jihonkim          #+#    #+#             */
-/*   Updated: 2022/12/30 11:53:09 by jihonkim         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:21:52 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	search_edit_wild(t_token *tok, int *i)
 	int	z = 0;
 	tmp_cmd = tok->cmd;
 	tok->cmd = new;
-	printf("new:%s\n", new[1]);
 	free_cmd(tmp_cmd);
 	free_cmd(tmp);
 	return (0);

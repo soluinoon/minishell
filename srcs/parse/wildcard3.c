@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:36 by jihonkim          #+#    #+#             */
-/*   Updated: 2022/12/30 11:53:12 by jihonkim         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:21:11 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	is_wild(char *wild_str, char *file_name)
 	while (i < wild_len && i < file_len && wild_str[i] == file_name[i])
 		i++;
 	if (i == wild_len && i == file_len)
-		return 1;
+		return (1);
 	else if (i == wild_len && i != file_len)
-		return 0;
+		return (0);
 	if (wild_str[i] == '*')
 	{
 		if (is_wildsub(wild_str, file_name, i))
-			return 1;
+			return (1);
 	}
 	return 0;
 }
