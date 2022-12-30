@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:45:37 by ko                #+#    #+#             */
-/*   Updated: 2022/12/30 10:50:51 by kko              ###   ########.fr       */
+/*   Updated: 2022/12/30 16:24:17 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,54 @@ char	*set_tok_cmd(t_token *tok, int i)
 	return (ret);
 }
 
+void	push_index_com(char *line, int *idx)
+{
+	t_comma_type	tmp;
+
+	tmp = ft_is_comma(line[*idx]);
+	while (ft_is_comma(line[*idx]) == tmp)
+		(*idx)++;
+	(*idx)--;
+}
+
+void	jump_redir(char *line, int *idx, int i)
+{
+	while (line[*idx] == ' ')
+	{
+		i = 1;
+		(*idx)++;
+	}
+	if (i == 1)
+		(*idx)--;
+	if (ft_is_redir(line[*idx]) == NO_DIREC)
+		return ;
+	(*idx)++;
+	if (ft_is_redir(line[*idx]))
+	{
+		(*idx)++;
+	}
+	while (line[*idx] == ' ')
+		(*idx)++;
+	while (line[*idx] && line[*idx] != ' ')
+	{
+		if (ft_is_comma(line[*idx]))
+			push_index_com(line, idx);
+		(*idx)++;
+	}
+	while (line[*idx] == ' ')
+		(*idx)++;
+}
+
 char	*get_tok_cmd(t_token *tok, int idx)
 {
 	int		i;
 	char	*ret;
 
 	i = 0;
+	jump_redir(tok->line, &i, 0);
 	while (tok->line[i] && idx != 0)
 	{
+		jump_redir(tok->line, &i, 0);
 		if (tok->line[i] == '\"' || tok->line[i] == '\'')
 		{
 			i++;
@@ -333,7 +373,6 @@ int	search_edit_wild(t_token *tok, int *i)
 	int	z = 0;
 	tmp_cmd = tok->cmd;
 	tok->cmd = new;
-	printf("new:%s\n", new[1]);
 	free_cmd(tmp_cmd);
 	free_cmd(tmp);
 	return (0);

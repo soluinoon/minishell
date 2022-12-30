@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ko <ko@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2022/12/30 06:18:39 by ko               ###   ########.fr       */
+/*   Updated: 2022/12/30 17:00:09 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,115 @@ static void	start_open(t_token *tok)
 	}
 }
 
+int	get_index_redir(char *tmp, int i)
+{
+	while (tmp[i] != 0 && tmp[i] != ' ')
+	{
+		if (ft_is_comma(tmp[i]))
+			push_index_com(tmp, &i);
+		i++;
+	}
+	return (i);
+}
+
+char	*get_prev_line(t_token *tok, int idx)
+{
+	char	*tmp;
+	char	*ret;
+	int		i;
+
+	tmp = tok->parent->right->line;
+	while (tmp[i] && idx != 0)
+	{
+		if (ft_is_redir(tmp[i]))
+		{
+			i++;
+			if (ft_is_redir(tmp[i]))
+				i++;
+			idx--;
+		}
+		i++;
+	}
+	while (ft_is_redir(tmp[i]) != NO_DIREC)
+		i++;
+	ret = ft_substr(tmp, i, get_index_redir(tmp, i));
+	return (ret);
+}
+
+int	com_wild_redir(char *tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp[i])
+	{
+		if (ft_is_comma(tmp[i]))
+			push_index_com(tmp, &i);
+		if (tmp[i] == '*')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_redir(char *s)
+{
+	if (ft_is_redir(*s))
+		(*s)++;
+	if (ft_is_redir(*s))
+		(*s)++;
+	return (s);
+}
+
+void	change_lien(t_token *tok, char **tmp1)
+{
+	char	*tmp;
+
+	tmp = tok->line;
+	tok->line = ft_strdup(tmp1[0]);
+	free(tmp);
+}
+
+void	edit_wild_redir(t_token *tok, int idx)
+{
+	char	*tmp;
+	char	**tmp1;
+	int		i;
+
+	tmp = get_prev_line(tok, idx);
+	if (com_wild_redir(tmp) == 0)
+		return ;
+	if (cnt_cwd_wild(tok, ft_redir(tok->line)) != 1)
+	{
+		tok->err_flag_redir = 2;
+		err_msg(NULL, tok, "*");
+	}
+	tmp1 = make_arrs_with_wild(tok, ft_redir(tok->line));
+	change_lien(tok, tmp1);
+	free_cmd(tmp1);
+	free(tmp);
+}
+
+void	expansion_wild_redir(t_token *tok)
+{
+	int		i;
+	int		j;
+
+	j = 0;
+	while (tok)
+	{
+		i = 0;
+		while (tok->line[i])
+		{
+			if (tok->line[i] == '*')
+				edit_wild_redir(tok, j);
+			i++;
+		}
+		tok = tok->next;
+		j++;
+	}
+}
+
 void	open_redir(t_token *tok)
 {
 	if (tok == 0)
@@ -92,6 +201,7 @@ void	open_redir(t_token *tok)
 	if ((tok->type == TOUT || tok->type == TADDOUT || \
 	tok->type == TIN || tok->type == TDOC) && g_errno != -2)
 	{
+		expansion_wild_redir(tok);
 		start_open(tok);
 	}
 }

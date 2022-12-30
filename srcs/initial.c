@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initial.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ko <ko@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:20:15 by kko               #+#    #+#             */
-/*   Updated: 2022/12/29 23:29:02 by ko               ###   ########.fr       */
+/*   Updated: 2022/12/30 14:21:22 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ void	change_lv(t_info *info)
 
 void	initial(t_info *info, char **envp)
 {
-	// struct termios	term;
+	struct termios	term;
 
 	init_env(info, envp);
 	change_lv(info);
 	set_signal(BASH);
-	// tcgetattr(STDIN_FILENO, &term);
-	// tcgetattr(STDIN_FILENO, info->old_term);
-	// term.c_lflag &= ~(ECHOCTL);
-	// term.c_cc[VMIN] = 1;
-	// term.c_cc[VTIME] = 0;
-	// tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	tcgetattr(STDIN_FILENO, &term);
+	tcgetattr(STDIN_FILENO, info->old_term);
+	term.c_lflag &= ~(ECHOCTL);
+	term.c_cc[VMIN] = 1;
+	term.c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
 
 void	set_signal(int num)
