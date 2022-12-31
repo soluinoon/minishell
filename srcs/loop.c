@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 20:51:52 by kko               #+#    #+#             */
-/*   Updated: 2022/12/30 10:49:59 by kko              ###   ########.fr       */
+/*   Updated: 2022/12/30 12:28:34 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_tok(t_token *tok)
 {
-	int i;
+	int	i;
 
 	while (tok)
 	{
@@ -32,7 +32,6 @@ void	print_tok(t_token *tok)
 	}
 }
 
-
 int	run(char *line, t_info *info)
 {
 	t_token	*token;
@@ -47,7 +46,6 @@ int	run(char *line, t_info *info)
 		return (free_lst(token, info));
 	if (expansion_wild(token) < 0)
 		return (free_lst(token, info));
-	print_tok(token);
 	token = get_tree(ft_tokenlast(token));
 	if (check_tree(token) == 1)
 		return (err_msg_syntax_int(info));

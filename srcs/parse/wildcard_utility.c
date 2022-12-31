@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcard4.c                                        :+:      :+:    :+:   */
+/*   wildcard_utility.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:19 by jihonkim          #+#    #+#             */
-/*   Updated: 2022/12/30 11:53:09 by jihonkim         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:34:39 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**filling_cmd(t_token *tok, int *idx, char **tmp, int cnt)
 	}
 	while (tmp[j])
 	{
-		new[i] = ft_strdup(tmp[j]); // i = 1 j = 0
+		new[i] = ft_strdup(tmp[j]);
 		j++;
 		i++;
 	}
@@ -68,10 +68,8 @@ int	search_edit_wild(t_token *tok, int *i)
 	cnt += cnt_cmd(tok->cmd);
 	tmp = make_arrs_with_wild(tok, tok->cmd[*i]);
 	new = filling_cmd(tok, i, tmp, cnt);
-	int	z = 0;
 	tmp_cmd = tok->cmd;
 	tok->cmd = new;
-	printf("new:%s\n", new[1]);
 	free_cmd(tmp_cmd);
 	free_cmd(tmp);
 	return (0);

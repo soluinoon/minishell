@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 09:45:37 by ko                #+#    #+#             */
-/*   Updated: 2022/12/30 11:53:13 by jihonkim         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:35:43 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,8 @@ static int	edit_wild(t_token *tok, int cnt, int *i)
 	return (0);
 }
 
-
 int	free_wild(char *tmp, int ret)
 {
 	free(tmp);
 	return (ret);
 }
-

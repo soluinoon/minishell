@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:36 by jihonkim          #+#    #+#             */
-/*   Updated: 2022/12/30 11:53:12 by jihonkim         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:30:02 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,31 @@ int	is_wild(char *wild_str, char *file_name)
 	while (i < wild_len && i < file_len && wild_str[i] == file_name[i])
 		i++;
 	if (i == wild_len && i == file_len)
-		return 1;
+		return (1);
 	else if (i == wild_len && i != file_len)
-		return 0;
+		return (0);
 	if (wild_str[i] == '*')
 	{
 		if (is_wildsub(wild_str, file_name, i))
-			return 1;
+			return (1);
 	}
-	return 0;
+	return (0);
 }
 
-int is_wildsub(char *wild_str, char *file_name, int index)
+int	is_wildsub(char *wild_str, char *file_name, int index)
 {
 	int	i;
 
 	i = 0;
 	while (index + i <= ft_strlen(file_name))
 	{
-		if (is_wild(&wild_str[index + 1],&file_name[index + i]))
+		if (is_wild(&wild_str[index + 1], &file_name[index + i]))
 		{
-			return 1;
+			return (1);
 		}
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 int	cnt_cwd_wild(t_token *tok, char *wild_str)
@@ -66,7 +66,7 @@ int	cnt_cwd_wild(t_token *tok, char *wild_str)
 	file = readdir(dir_ptr);
 	while (file != NULL)
 	{
-		if (file->d_name[0] != '.' && is_wild(wild_str, file->d_name)) // 숨겨진 폴더는 제외하고 카운트
+		if (file->d_name[0] != '.' && is_wild(wild_str, file->d_name))
 		i++;
 		file = readdir(dir_ptr);
 	}
