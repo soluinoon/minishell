@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:25:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 20:23:37 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 21:44:54 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,21 +249,21 @@ int				what_wild(char **new);
 int				edit_wild(t_token *tok, int cnt, int *i);
 int				free_wild(char *tmp, int ret);
 
-//wildcard2
+//wildcard_com
 char			*set_tok_cmd(t_token *tok, int i);
 void			push_index_com(char *line, int *idx);
 void			jump_redir(char *line, int *idx, int i);
 char			*get_tok_cmd(t_token *tok, int idx);
 int				com_wild(t_token *tok, int idx, char *s);
 
-//wildcard3
+//wildcard_arrs
 int				is_wild(char *wild_str, char *file_name);
 int 			is_wildsub(char *wild_str, char *file_name, int index);
 int				cnt_cwd_wild(t_token *tok, char *wild_str);
 void			fill_arrs(t_token *tok, char *wild_str, char **arrs);
 char			**make_arrs_with_wild(t_token *tok, char *wild_str);
 
-//wildcard4
+//wildcard_utility
 void			other_filling(t_token *tok, int *idx, char ***new, int j);
 char			**filling_cmd(t_token *tok, int *idx, char **tmp, int cnt);
 int				search_edit_wild(t_token *tok, int *i);
