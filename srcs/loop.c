@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 20:51:52 by kko               #+#    #+#             */
-/*   Updated: 2022/12/30 17:35:25 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 10:59:03 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	print_tok(t_token *tok)
 	}
 }
 
-
 int	run(char *line, t_info *info)
 {
 	t_token	*token;
@@ -52,15 +51,15 @@ int	run(char *line, t_info *info)
 	if (check_tree(token) == 1)
 		return (err_msg_syntax_int(info));
 	open_redir(token);
-	// if (g_errno == -2)
-	// {
-	// 	g_errno = 0;
-	// 	info->exit_num = 1;
-	// 	return (info->exit_num);
-	// }
-	// run_shell(token);
-	// free_tree(token);
-	// return (info->exit_num);
+	if (g_errno == -2)
+	{
+		g_errno = 0;
+		info->exit_num = 1;
+		return (info->exit_num);
+	}
+	run_shell(token);
+	free_tree(token);
+	return (info->exit_num);
 }
 
 void	eof_exit(t_info *info)

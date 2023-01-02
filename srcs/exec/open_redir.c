@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 09:49:41 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 10:58:43 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	start_open(t_token *tok)
 	{
 		if (tok->parent->err_flag_redir == -1)
 			break ;
-		if (tok->err_flag_redir == 2)
+		if (tmp->err_flag_redir == 2)
 			break ;
 		else if (tmp->type == TOUT || tmp->type == TADDOUT)
 		{
@@ -96,13 +96,13 @@ int	get_index_redir(char *tmp, int i)
 	return (i);
 }
 
-char	*get_prev_line(t_token *tok, int idx)
+char	*get_prev_line(t_token *tok, t_token *first, int idx)
 {
 	char	*tmp;
 	char	*ret;
 	int		i;
 
-	tmp = tok->parent->right->line;
+	tmp = first->parent->right->line;
 	i = 0;
 	while (tmp[i] && idx != 0)
 	{
@@ -155,13 +155,13 @@ void	change_lien(t_token *tok, char **tmp1)
 	free(tmp);
 }
 
-void	edit_wild_redir(t_token *tok, int idx)
+void	edit_wild_redir(t_token *tok, t_token *first, int idx)
 {
 	char	*tmp;
 	char	**tmp1;
 	int		i;
 
-	tmp = get_prev_line(tok, idx);
+	tmp = get_prev_line(tok, first, idx);
 	if (com_wild_redir(tmp) == 0)
 	{
 		free(tmp);
@@ -179,7 +179,7 @@ void	edit_wild_redir(t_token *tok, int idx)
 	free_cmd(tmp1);
 }
 
-void	expansion_wild_redir(t_token *tok)
+void	expansion_wild_redir(t_token *tok, t_token *first)
 {
 	int		i;
 	int		j;
@@ -192,7 +192,7 @@ void	expansion_wild_redir(t_token *tok)
 		{
 			if (tok->line[i] == '*')
 			{
-				edit_wild_redir(tok, j);
+				edit_wild_redir(tok, first, j);
 				break ;
 			}
 			i++;
@@ -213,7 +213,8 @@ void	open_redir(t_token *tok)
 	if ((tok->type == TOUT || tok->type == TADDOUT || \
 	tok->type == TIN || tok->type == TDOC) && g_errno != -2)
 	{
-		expansion_wild_redir(tok);
+		if (tok->type != TDOC)
+			expansion_wild_redir(tok, tok);
 		start_open(tok);
 	}
 }
