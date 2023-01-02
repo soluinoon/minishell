@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:31:54 by kko               #+#    #+#             */
-/*   Updated: 2022/12/12 21:30:23 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 16:56:49 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	run_exec(t_token *tok)
 	}
 	else if (identify_built_exec(tok->right) == 0)
 	{
-		set_signal(IGN);
+		set_signal(FORK);
 		exec(tok);
 		set_signal(BASH);
 	}
@@ -41,14 +41,13 @@ static void	run_subshell(t_token *tok)
 	pid = fork_util(tok);
 	if (pid == 0)
 	{
-		set_signal(DFL);
 		errno = 0;
 		if (tok->left->type != NO_REDIR)
 			io_ctl_cmd(tok->left);
-		exit(run(tok->right->line, tok->info));
+		exit(run(ft_strdup(tok->right->line), tok->info));
 	}
 	else if (pid > 0)
-		wait(&stat);
+		waitpid(pid, &stat, 0);
 	if (WIFEXITED(stat))
 		tok->info->exit_num = WEXITSTATUS(stat);
 	else if (WIFSIGNALED(stat))
@@ -69,11 +68,13 @@ void	run_shell(t_token *tok)
 	{
 		run_shell(tok->left);
 		if (tok->type == TRDYCMD)
-		{
 			run_exec(tok);
-		}
 		if (tok->type == TRDYBRACH)
+		{
+			set_signal(IGN);
 			run_subshell(tok);
+			set_signal(BASH);
+		}
 		if ((tok->type == TDAND && tok->info->exit_num == 0) || \
 		(tok->type == TOR && tok->info->exit_num != 0))
 			run_shell(tok->right);

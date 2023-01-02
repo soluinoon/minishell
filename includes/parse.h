@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:25:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 12:39:04 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 15:26:30 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_env_list	t_env_list;
 struct s_info
 {
 	struct termios	*old_term;
+	struct termios	*term;
 	t_env_list		*env_list;
 	char			**path;
 	int				exit_num;

@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:37:52 by kko               #+#    #+#             */
-/*   Updated: 2022/12/11 20:07:17 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 16:24:21 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	exec(t_token *tok)
 	{
 		tok->info->exit_num = 0;
 		set_signal(DFL);
+		tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
 		errno = 0;
 		if (tok->left->type != NO_REDIR)
 			io_ctl_cmd(tok->left);

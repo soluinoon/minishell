@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:58:51 by kko               #+#    #+#             */
-/*   Updated: 2022/12/12 21:34:47 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 16:20:42 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_child(t_token *tok, int i, t_pipe *pip)
 	int	tmp;
 
 	set_signal(DFL);
+	tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
 	tok->info->exit_num = 0;
 	errno = 0;
 	tmp = 0;

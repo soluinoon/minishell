@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 20:51:52 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 12:40:22 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 17:00:02 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ void	print_tok(t_token *tok)
 	}
 }
 
+void	print_tree(t_token *tok)
+{
+	if (tok == 0)
+		return ;
+	printf("tok:%s :%d\n", tok->line, tok->type);
+	print_tree(tok->left);
+	print_tree(tok->right);
+}
+
+
+
+
 int	run(char *line, t_info *info)
 {
 	t_token	*token;
@@ -46,7 +58,6 @@ int	run(char *line, t_info *info)
 		return (free_lst(token, info));
 	if (expansion_wild(token) < 0)
 		return (free_lst(token, info));
-	print_tok(token);
 	token = get_tree(ft_tokenlast(token));
 	if (check_tree(token) == 1)
 		return (err_msg_syntax_int(info));
@@ -74,6 +85,7 @@ void	loop_set(t_info *info)
 	char	**tmp;
 
 	tmp = info->path;
+	tcsetattr(STDIN_FILENO, TCSANOW, info->term);
 	dup2(info->stdio_backup[0], 0);
 	dup2(info->stdio_backup[1], 1);
 	info->path = info_get_path(info);

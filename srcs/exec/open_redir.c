@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 10:58:43 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 15:38:50 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	open_in(t_token *tok, t_token *tmp)
 	else if (tmp->type == TDOC)
 	{
 		set_signal(FORK);
+		signal(SIGQUIT, SIG_IGN);
 		tok->fd_in = here_doc(find_redir(tmp->line + 2), tok);
 		set_signal(BASH);
 	}

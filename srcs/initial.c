@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:20:15 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 12:40:15 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 17:01:31 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	handler(int signo)
 	int	pid;
 
 	pid = waitpid(-1, NULL, WNOHANG);
-	printf("\n");
+	ft_putstr_fd("\n", 2);
 	if (rl_on_new_line() == -1)
 		exit(1);
 	rl_replace_line("", 1);
@@ -28,14 +28,7 @@ static void	handler(int signo)
 
 static void	handler1(int signo)
 {
-	int	pid;
-
-	pid = waitpid(-1, NULL, WNOHANG);
-	printf("\n");
-	if (rl_on_new_line() == -1)
-		exit(1);
-	rl_replace_line("", 1);
-	g_errno = -2;
+	ft_putstr_fd("\n", 2);
 	(void) signo;
 }
 
@@ -63,18 +56,15 @@ void	change_lv(t_info *info)
 
 void	initial(t_info *info, char **envp)
 {
-	struct termios	term;
-	struct termios	old_term;
-
 	init_env(info, envp);
 	change_lv(info);
 	set_signal(BASH);
-	tcgetattr(STDIN_FILENO, &term);
+	tcgetattr(STDIN_FILENO, info->term);
 	tcgetattr(STDIN_FILENO, info->old_term);
-	term.c_lflag &= ~(ECHOCTL);
-	term.c_cc[VMIN] = 1;
-	term.c_cc[VTIME] = 0;
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	info->term->c_lflag &= ~(ECHOCTL);
+	info->term->c_cc[VMIN] = 1;
+	info->term->c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, info->term);
 }
 
 void	set_signal(int num)
@@ -87,12 +77,12 @@ void	set_signal(int num)
 	else if (num == FORK)
 	{
 		signal(SIGINT, handler1);
-		signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, handler1);
 	}
 	else if (num == DFL)
 	{
 		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, SIG_DFL);
 	}
 	else if (num == DOC)
 	{
