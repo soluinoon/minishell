@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 20:59:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 18:58:53 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 20:27:05 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static void	devide_redir_cmd(t_token **token, t_token **first)
 		(*token)->type = TNOCMD;
 	free_sec_arr((*token)->cmd);
 	(*token)->cmd = new_cmd_arr;
+	// (*token)->line_old = ft_strdup((*token)->line);
 	// tmp = (*token)->line;
 	// (*token)->line = update_token_line(token);
 	// free(tmp);

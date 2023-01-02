@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:25:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 15:26:30 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 20:23:37 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ struct s_token
 	pid_t				last_pid;
 	char				**cmd;
 	char				*line;
+	char				*line_old;
 	struct s_token		*next;
 	struct s_token		*prev;
 	struct s_token		*right;

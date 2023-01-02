@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:27 by jihonkim          #+#    #+#             */
-/*   Updated: 2022/12/30 17:20:46 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 20:26:26 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	push_index_com(char *line, int *idx)
 	t_comma_type	tmp;
 
 	tmp = ft_is_comma(line[*idx]);
-	while (ft_is_comma(line[*idx]) == tmp)
+	(*idx)++;
+	while (ft_is_comma(line[*idx]) != tmp)
 		(*idx)++;
-	(*idx)--;
 }
 
 void	jump_redir(char *line, int *idx, int i)

@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:39:32 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/12 19:48:47 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 20:18:50 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ t_brachek_type type, t_token *tok)
 	(*index)++;
 	if (type == O_BRACHEK)
 		type = C_BRACHEK;
-	while (line[*index] != '\0')
+	while (line[*index] != 0)
 	{
 		if (ft_is_comma_brachek(line[*index]) == type)
 			return ;
 		(*index)++;
 	}
+	(*index)--;
 	throw_error_syntax(SYNTAX_ERR, tok);
 }
 

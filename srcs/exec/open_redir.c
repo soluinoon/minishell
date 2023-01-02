@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 18:58:22 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 20:19:21 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,10 @@ int	com_wild_redir(char *tmp)
 	while (tmp[i])
 	{
 		if (ft_is_comma(tmp[i]))
+		{
 			push_index_com(tmp, &i);
-		if (tmp[i] == '*')
+		}
+		else if (tmp[i] == '*')
 			return (1);
 		i++;
 	}
@@ -147,6 +149,8 @@ char	*ft_redir(char *s)
 		s++;
 	if (ft_is_redir(*s))
 		s++;
+	while (*s == ' ')
+		s++;
 	return (s);
 }
 
@@ -156,6 +160,16 @@ void	change_lien(t_token *tok, char **tmp1)
 
 	tmp = tok->line;
 	tok->line = ft_strdup(tmp1[0]);
+	free(tmp);
+	tmp = tok->line;
+	if (tok->type == TDOC)
+		tok->line = ft_strjoin("<<", tok->line);
+	if (tok->type == TIN)
+		tok->line = ft_strjoin("<", tok->line);
+	if (tok->type == TOUT)
+		tok->line = ft_strjoin(">", tok->line);
+	if (tok->type == TADDOUT)
+		tok->line = ft_strjoin(">>", tok->line);
 	free(tmp);
 }
 
