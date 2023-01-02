@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:22:19 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/12 20:07:31 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 12:39:46 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_info	*new_info(void)
 	if (!new)
 		throw_error(MALLOC_ERR);
 	new->env_list = 0;
-	new->old_term = 0;
+	new->old_term = malloc(sizeof(struct termios));
 	new->path = 0;
 	new->exit_num = 0;
 	new->stdio_backup[0] = dup(STDIN_FILENO);

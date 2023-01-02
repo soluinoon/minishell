@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:20:15 by kko               #+#    #+#             */
-/*   Updated: 2022/12/30 14:21:22 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 12:40:15 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	change_lv(t_info *info)
 void	initial(t_info *info, char **envp)
 {
 	struct termios	term;
+	struct termios	old_term;
 
 	init_env(info, envp);
 	change_lv(info);

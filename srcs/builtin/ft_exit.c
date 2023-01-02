@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 14:20:58 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/12 19:49:08 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 12:32:28 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_exit(t_token *tok, char **cmd)
 	if (cmd[1] == NULL)
 	{
 		printf("exit\n");
+		// tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
 		exit(tok->info->exit_num);
 	}
 	else if (can_be_exit_num(cmd[1]) == 1)
@@ -47,6 +48,7 @@ void	ft_exit(t_token *tok, char **cmd)
 		else
 		{
 			printf("exit\n");
+			// tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
 			exit(ft_atoi(cmd[1]));
 		}
 	}
@@ -54,6 +56,7 @@ void	ft_exit(t_token *tok, char **cmd)
 	{
 		printf("exit\n");
 		throw_error_message("exit", cmd[1], "numeric argument required", 255);
+		// tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
 		exit(255);
 	}
 }

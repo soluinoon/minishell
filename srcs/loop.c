@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 20:51:52 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 10:59:03 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 12:40:22 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	run(char *line, t_info *info)
 void	eof_exit(t_info *info)
 {
 	printf("exit\n");
-	// tcsetattr(STDIN_FILENO, TCSANOW, info->old_term);
+	tcsetattr(STDIN_FILENO, TCSANOW, info->old_term);
 	exit(info->exit_num);
 }
 
