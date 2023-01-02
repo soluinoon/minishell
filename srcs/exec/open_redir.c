@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2022/12/30 17:50:41 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 09:49:41 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static void	start_open(t_token *tok)
 	while (tmp)
 	{
 		if (tok->parent->err_flag_redir == -1)
+			break ;
+		if (tok->err_flag_redir == 2)
 			break ;
 		else if (tmp->type == TOUT || tmp->type == TADDOUT)
 		{
@@ -169,7 +171,8 @@ void	edit_wild_redir(t_token *tok, int idx)
 	if (cnt_cwd_wild(tok, ft_redir(tok->line)) != 1)
 	{
 		tok->err_flag_redir = 2;
-		err_msg(NULL, tok, "*");
+		throw_error_message(NULL, "*", "ambiguous redirect", 0);
+		return ;
 	}
 	tmp1 = make_arrs_with_wild(tok, ft_redir(tok->line));
 	change_lien(tok, tmp1);
@@ -188,9 +191,14 @@ void	expansion_wild_redir(t_token *tok)
 		while (tok->line[i])
 		{
 			if (tok->line[i] == '*')
+			{
 				edit_wild_redir(tok, j);
+				break ;
+			}
 			i++;
 		}
+		if (tok->err_flag_redir == 2)
+			return ;
 		tok = tok->next;
 		j++;
 	}
