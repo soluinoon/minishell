@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ko <ko@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 20:59:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/30 02:41:02 by ko               ###   ########.fr       */
+/*   Updated: 2023/01/02 18:58:53 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static void	devide_redir_cmd(t_token **token, t_token **first)
 	char	**new_cmd_arr;
 	int		cmd_len;
 	char	*tmp;
+
 
 	redir_token = pick_create_redir_tokens(token, (*token)->cmd);
 	cmd_len = get_sec_arr_len((*token)->cmd) - token_list_len(redir_token);

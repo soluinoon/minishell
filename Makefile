@@ -6,7 +6,7 @@
 #    By: kko <kko@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 15:22:25 by seokchoi          #+#    #+#              #
-#    Updated: 2022/12/30 17:27:03 by kko              ###   ########.fr        #
+#    Updated: 2023/01/02 18:33:54 by kko              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ OBJS	= ${addprefix ${SOURCE},${SRCS:.c=.o}} ${addprefix ${SRC_ENV},${SRCS_ENV:.c
 CC		= cc
 # CC		= clang-12
 # CFLAGS	= -Wall -Werror -Wextra
-# CFLAGS	= -fsanitize=address
+CFLAGS	= -fsanitize=address
 NAME    = minishell
 HEAD	= includes
 LIBFT	= libft

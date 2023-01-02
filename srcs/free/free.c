@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:23:25 by kko               #+#    #+#             */
-/*   Updated: 2022/12/10 21:31:21 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 18:30:45 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	free_tree(t_token *tok)
 	free_tree(tok->right);
 	free_cmd(tok->cmd);
 	if (tok->type == TIN || tok->type == TADDOUT || \
-	tok->type == TDOC || tok->type == TOUT)
+	tok->type == TDOC || tok->type == TOUT) //뒤에있는 리다이렉션 프리 필요
 	{
 		if (tok->fd_in != -1)
 			close_util(tok->fd_in, tok);

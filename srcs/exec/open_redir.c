@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 15:38:50 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 18:58:22 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ static void	start_open(t_token *tok)
 		if (tok->parent->err_flag_redir == -1)
 			break ;
 		if (tmp->err_flag_redir == 2)
+		{
+			tok->parent->err_flag_redir = -1;
 			break ;
+		}
 		else if (tmp->type == TOUT || tmp->type == TADDOUT)
 		{
 			if (tok->fd_out != -1)

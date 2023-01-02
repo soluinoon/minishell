@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:08:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/09 00:36:37 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/02 19:00:08 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,16 @@ int	count_space_out_of_comma(char *str)
 			while (str[i] == ' ')
 				i++;
 		}
+		else if (ft_is_redir(str[i])) //추가부분
+		{
+			count++;
+			i++;
+			if (ft_is_redir(str[i]))
+				i++;
+		}
 		else if (str[i])
 			i++;
 	}
+	i = 0;
 	return (count);
 }
