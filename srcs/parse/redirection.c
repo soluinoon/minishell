@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 20:59:30 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 20:27:05 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/03 10:03:19 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ static void	devide_redir_cmd(t_token **token, t_token **first)
 	t_token	*redir_token;
 	char	**new_cmd_arr;
 	int		cmd_len;
-	char	*tmp;
-
+	// char	*tmp;
 
 	redir_token = pick_create_redir_tokens(token, (*token)->cmd);
 	cmd_len = get_sec_arr_len((*token)->cmd) - token_list_len(redir_token);

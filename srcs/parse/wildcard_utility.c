@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wildcard_utility.c                                 :+:      :+:    :+:   */
+/*   wildcard4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:19 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/02 21:37:30 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 10:05:17 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	other_filling(t_token *tok, int *idx, char ***new, int j)
 	char	**tmp;
 	int		i;
 
-	i = 1;
+	i = 0;
 	tmp = *new;
 	while (tok->cmd[i + *idx])
 	{
 		tmp[j] = ft_strdup(tok->cmd[i + *idx]);
 		i++;
+		j++;
 	}
 }
 
@@ -36,14 +37,14 @@ char	**filling_cmd(t_token *tok, int *idx, char **tmp, int cnt)
 	j = 0;
 	new = (char **)malloc(sizeof(char *) * (cnt + 1));
 	new[cnt] = 0;
-	while (new[i] && i < *idx)
+	while (i < *idx)
 	{
 		new[i] = ft_strdup(tok->cmd[i]);
 		i++;
 	}
 	while (tmp[j])
 	{
-		new[i] = ft_strdup(tmp[j]); // i = 1 j = 0
+		new[i] = ft_strdup(tmp[j]);
 		j++;
 		i++;
 	}
@@ -68,7 +69,6 @@ int	search_edit_wild(t_token *tok, int *i)
 	cnt += cnt_cmd(tok->cmd);
 	tmp = make_arrs_with_wild(tok, tok->cmd[*i]);
 	new = filling_cmd(tok, i, tmp, cnt);
-	int	z = 0;
 	tmp_cmd = tok->cmd;
 	tok->cmd = new;
 	free_cmd(tmp_cmd);
@@ -94,20 +94,24 @@ int	wild_type(t_token *tok, int *i)
 int	expansion_wild(t_token *tok)
 {
 	int	i;
+	int	j;
 
 	while (tok)
 	{
 		i = 0;
+		j = 0;
 		if (tok->type == TCMD)
 		{
 			while (tok->cmd[i])
 			{
-				if (com_wild(tok, i, tok->cmd[i]) == 1)
+				if (com_wild(tok, j) == 1)
 				{
 					if (wild_type(tok, &i) < 0)
 						return (-1);
+					// printf("i:%d\n", i);
 				}
 				i++;
+				j++;
 			}
 		}
 		tok = tok->next;

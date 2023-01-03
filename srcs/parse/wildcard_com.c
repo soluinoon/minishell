@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_com.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:27 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/02 21:37:35 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:14:13 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ char	*get_tok_cmd(t_token *tok, int idx)
 	return (ret);
 }
 
-int	com_wild(t_token *tok, int idx, char *s)
+int	com_wild(t_token *tok, int j)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = get_tok_cmd(tok, idx);
+	tmp = get_tok_cmd(tok, j);
 	if (ft_strchr(tmp, '*') == 0)
 		return (free_wild(tmp, 0));
 	while (tmp[i])

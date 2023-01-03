@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:25:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 21:44:54 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:14:16 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ char			*set_tok_cmd(t_token *tok, int i);
 void			push_index_com(char *line, int *idx);
 void			jump_redir(char *line, int *idx, int i);
 char			*get_tok_cmd(t_token *tok, int idx);
-int				com_wild(t_token *tok, int idx, char *s);
+int				com_wild(t_token *tok, int j);
 
 //wildcard_arrs
 int				is_wild(char *wild_str, char *file_name);

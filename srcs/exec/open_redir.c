@@ -6,7 +6,7 @@
 /*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2023/01/02 20:19:21 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/03 10:05:39 by kko              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*get_prev_line(t_token *tok, t_token *first, int idx)
 	char	*ret;
 	int		i;
 
+	(void)tok;
 	tmp = first->parent->right->line;
 	i = 0;
 	while (tmp[i] && idx != 0)
@@ -177,7 +178,6 @@ void	edit_wild_redir(t_token *tok, t_token *first, int idx)
 {
 	char	*tmp;
 	char	**tmp1;
-	int		i;
 
 	tmp = get_prev_line(tok, first, idx);
 	if (com_wild_redir(tmp) == 0)

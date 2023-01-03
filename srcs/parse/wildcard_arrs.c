@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard_arrs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:36 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/02 21:35:47 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:14:11 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int is_wildsub(char *wild_str, char *file_name, int index)
 	int	i;
 
 	i = 0;
-	while (index + i <= ft_strlen(file_name))
+	while (index + i <= (int)ft_strlen(file_name))
 	{
 		if (is_wild(&wild_str[index + 1],&file_name[index + i]))
 		{
