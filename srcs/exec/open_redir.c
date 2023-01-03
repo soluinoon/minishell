@@ -6,7 +6,7 @@
 /*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2023/01/03 13:59:06 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:31:36 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ static void	open_in(t_token *tok, t_token *tmp)
 	}
 }
 
+static void	check_open(t_token *tok, t_token *tmp)
+{
+	if (tmp->type == TOUT || tmp->type == TADDOUT)
+	{
+		if (tok->fd_out != -1)
+			close_util(tok->fd_out, tok);
+		open_out(tok, tmp);
+	}
+	else if (tmp->type == TIN || tmp->type == TDOC)
+	{
+		if (tok->fd_in != -1)
+			close_util(tok->fd_in, tok);
+		open_in(tok, tmp);
+	}
+}
+
 static void	start_open(t_token *tok)
 {
 	t_token	*tmp;
@@ -73,152 +89,8 @@ static void	start_open(t_token *tok)
 			tok->parent->err_flag_redir = -1;
 			break ;
 		}
-		else if (tmp->type == TOUT || tmp->type == TADDOUT)
-		{
-			if (tok->fd_out != -1)
-				close_util(tok->fd_out, tok);
-			open_out(tok, tmp);
-		}
-		else if (tmp->type == TIN || tmp->type == TDOC)
-		{
-			if (tok->fd_in != -1)
-				close_util(tok->fd_in, tok);
-			open_in(tok, tmp);
-		}
+		check_open(tok, tmp); // 이게 맞는지
 		tmp = tmp->next;
-	}
-}
-
-int	get_index_redir(char *tmp, int i)
-{
-	while (tmp[i] != 0 && tmp[i] != ' ')
-	{
-		if (ft_is_comma(tmp[i]))
-			push_index_com(tmp, &i);
-		i++;
-	}
-	return (i);
-}
-
-char	*get_prev_line(t_token *tok, t_token *first, int idx)
-{
-	char	*tmp;
-	char	*ret;
-	int		i;
-
-	(void)tok;
-	tmp = first->parent->right->line;
-	i = 0;
-	while (tmp[i] && idx != 0)
-	{
-		if (ft_is_redir(tmp[i]))
-		{
-			i++;
-			if (ft_is_redir(tmp[i]))
-				i++;
-			idx--;
-		}
-		i++;
-	}
-	while (ft_is_redir(tmp[i]) == NO_DIREC)
-		i++;
-	ret = ft_substr(tmp, i, get_index_redir(tmp, i));
-	return (ret);
-}
-
-int	com_wild_redir(char *tmp)
-{
-	int	i;
-
-	i = 0;
-	while (tmp[i])
-	{
-		if (ft_is_comma(tmp[i]))
-		{
-			push_index_com(tmp, &i);
-		}
-		else if (tmp[i] == '*')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-char	*ft_redir(char *s)
-{
-	if (ft_is_redir(*s))
-		s++;
-	if (ft_is_redir(*s))
-		s++;
-	while (*s == ' ')
-		s++;
-	return (s);
-}
-
-void	change_lien(t_token *tok, char **tmp1)
-{
-	char	*tmp;
-
-	tmp = tok->line;
-	tok->line = ft_strdup(tmp1[0]);
-	free(tmp);
-	tmp = tok->line;
-	if (tok->type == TDOC)
-		tok->line = ft_strjoin("<<", tok->line);
-	if (tok->type == TIN)
-		tok->line = ft_strjoin("<", tok->line);
-	if (tok->type == TOUT)
-		tok->line = ft_strjoin(">", tok->line);
-	if (tok->type == TADDOUT)
-		tok->line = ft_strjoin(">>", tok->line);
-	free(tmp);
-}
-
-void	edit_wild_redir(t_token *tok, t_token *first, int idx)
-{
-	char	*tmp;
-	char	**tmp1;
-
-	tmp = get_prev_line(tok, first, idx);
-	if (com_wild_redir(tmp) == 0)
-	{
-		free(tmp);
-		return ;
-	}
-	free(tmp);
-	if (cnt_cwd_wild(tok, ft_redir(tok->line)) != 1)
-	{
-		tok->err_flag_redir = 2;
-		throw_error_message(NULL, "*", "ambiguous redirect", 0);
-		return ;
-	}
-	tmp1 = make_arrs_with_wild(tok, ft_redir(tok->line));
-	change_lien(tok, tmp1);
-	free_cmd(tmp1);
-}
-
-void	expansion_wild_redir(t_token *tok, t_token *first)
-{
-	int		i;
-	int		j;
-
-	j = 0;
-	while (tok)
-	{
-		i = 0;
-		while (tok->line[i])
-		{
-			if (tok->line[i] == '*')
-			{
-				edit_wild_redir(tok, first, j);
-				break ;
-			}
-			i++;
-		}
-		if (tok->err_flag_redir == 2)
-			return ;
-		tok = tok->next;
-		j++;
 	}
 }
 
