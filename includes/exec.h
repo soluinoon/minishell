@@ -6,7 +6,7 @@
 /*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:17:36 by kko               #+#    #+#             */
-/*   Updated: 2023/01/03 14:59:13 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:09:40 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ int		com_wild_redir(char *tmp);
 char	*ft_redir(char *s);
 void	change_lien(t_token *tok, char **tmp1);
 
-
 //open_redir_wild
 void	edit_wild_redir(t_token *tok, t_token *first, int idx);
 void	expansion_wild_redir(t_token *tok, t_token *first);
-
 
 //open_util
 char	*find_redir(char *s);
