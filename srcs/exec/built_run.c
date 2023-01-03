@@ -6,7 +6,7 @@
 /*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 20:22:40 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/03 15:08:20 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:34:51 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,5 @@ void	builtin_alone_exec(t_token *tok)
 	if (tok->right->type == TNOCMD)
 		return ;
 	ft_builitin(tok->right);
-	// if (tok->fd_in != -1)
-	// 	close_util(tok->fd_in, tok);
-	// if (tok->fd_out != -1)
-	// 	close_util(tok->fd_out, tok);
 	set_signal(BASH);
 }

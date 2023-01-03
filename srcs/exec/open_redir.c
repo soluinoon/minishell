@@ -6,7 +6,7 @@
 /*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:20:38 by kko               #+#    #+#             */
-/*   Updated: 2023/01/03 14:31:36 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:34:58 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	start_open(t_token *tok)
 			tok->parent->err_flag_redir = -1;
 			break ;
 		}
-		check_open(tok, tmp); // 이게 맞는지
+		check_open(tok, tmp);
 		tmp = tmp->next;
 	}
 }
