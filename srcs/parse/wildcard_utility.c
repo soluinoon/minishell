@@ -6,7 +6,7 @@
 /*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:19 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/03 13:51:24 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:31:35 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ char	**filling_cmd(t_token *tok, int *idx, char **tmp, int cnt)
 		j++;
 		i++;
 	}
-	*idx = i - 1;
+	(*idx)++;
 	other_filling(tok, idx, &new, i);
+	*idx = i - 1;
 	return (new);
 }
 
