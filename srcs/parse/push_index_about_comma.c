@@ -6,7 +6,7 @@
 /*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:08:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/03 14:45:18 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:05:56 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ void	push_index_until_space_or_oper(char *line, int *index)
 void	count_redir(int *count, int *i, char *str)
 {
 	// 맞는지?
-	*count++;
-	*i++;
+
+	*count = *count + 1;
+	*i = *i + 1;
 	if (ft_is_redir(*str))
-		*i++;
+		*i = *i + 1;
 }
 
 int	count_space_out_of_comma(char *str)

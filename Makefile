@@ -6,7 +6,7 @@
 #    By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 15:22:25 by seokchoi          #+#    #+#              #
-#    Updated: 2023/01/03 13:15:12 by jihonkim         ###   ########.fr        #
+#    Updated: 2023/01/03 15:01:57 by jihonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ SRCS_BULT=  ft_cd.c ft_echo.c ft_env.c ft_export.c ft_pwd.c ft_unset.c \
 			export_util.c ft_exit.c ft_export_util.c
 SRCS_ENV= ft_split_for_env.c env.c free.c env_arr.c check_env.c ft_unset_env_list.c
 SRCS_ERR= err.c err_msg_syntax_int.c
-SRCS_EXE= built_run.c exec.c here_doc.c ioctl.c open_redir.c open_util.c \
-			path.c pipe_util.c run_pipe.c run.c
+SRCS_EXE= built_run.c exec.c here_doc.c ioctl.c open_redir.c open_redir_util.c open_redir_wild.c \
+			open_util.c path.c pipe_util.c run_pipe.c run.c
 SRCS_PAR= check_list.c check_list2.c check_subshell_redir.c check_wave.c \
 			cmd.c cut_cmd.c delete_comma_check_env.c ft_strjoin_space.c \
 			init_token.c is_type.c key_util.c malloc_utils.c oper_type.c \

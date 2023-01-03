@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ko <ko@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:17:36 by kko               #+#    #+#             */
-/*   Updated: 2022/12/10 06:05:57 by ko               ###   ########.fr       */
+/*   Updated: 2023/01/03 14:59:13 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ void	io_ctl(t_pipe *pip, int i, t_token *tok);
 
 //oepn_redir
 void	open_redir(t_token *tok);
+
+//open_redir_util
+int		get_index_redir(char *tmp, int i);
+char	*get_prev_line(t_token *tok, t_token *first, int idx);
+int		com_wild_redir(char *tmp);
+char	*ft_redir(char *s);
+void	change_lien(t_token *tok, char **tmp1);
+
+
+//open_redir_wild
+void	edit_wild_redir(t_token *tok, t_token *first, int idx);
+void	expansion_wild_redir(t_token *tok, t_token *first);
+
 
 //open_util
 char	*find_redir(char *s);
