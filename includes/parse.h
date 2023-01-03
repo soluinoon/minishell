@@ -6,7 +6,7 @@
 /*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:25:03 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/03 13:14:16 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:43:29 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,8 @@ int				check_wild(char *s);
 DIR				*opendir_util(char *pwd, t_token *tok);
 
 //wildcard
-int				write_dir(struct dirent *file, DIR *dir_ptr, char ***src, int i);
+int				write_dir(struct dirent *file, DIR *dir_ptr, \
+				char ***src, int i);
 int				write_wild(char ***dst, char ***src, t_token *tok, char *pwd);
 int				what_wild(char **new);
 int				edit_wild(t_token *tok, int cnt, int *i);
@@ -258,7 +259,7 @@ int				com_wild(t_token *tok, int j);
 
 //wildcard_arrs
 int				is_wild(char *wild_str, char *file_name);
-int 			is_wildsub(char *wild_str, char *file_name, int index);
+int				is_wildsub(char *wild_str, char *file_name, int index);
 int				cnt_cwd_wild(t_token *tok, char *wild_str);
 void			fill_arrs(t_token *tok, char *wild_str, char **arrs);
 char			**make_arrs_with_wild(t_token *tok, char *wild_str);

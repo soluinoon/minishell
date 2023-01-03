@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:22:19 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 15:30:32 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/03 14:03:43 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ static t_info	*new_info(void)
 	new->stdio_backup[0] = dup(STDIN_FILENO);
 	new->stdio_backup[1] = dup(STDOUT_FILENO);
 	return (new);
+}
+
+void	eof_exit(t_info *info)
+{
+	printf("exit\n");
+	tcsetattr(STDIN_FILENO, TCSANOW, info->old_term);
+	exit(info->exit_num);
 }
 
 int	main(int ac, char **av, char **envp)

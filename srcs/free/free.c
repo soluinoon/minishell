@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:23:25 by kko               #+#    #+#             */
-/*   Updated: 2023/01/03 10:07:38 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/03 13:47:29 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	free_lst(t_token *tok, t_info *info)
 
 void	free_prev_tok(t_token *tok)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	if (tok->next == 0)
 		return ;
@@ -71,7 +71,7 @@ void	free_tree(t_token *tok)
 	free_tree(tok->right);
 	free_cmd(tok->cmd);
 	if (tok->type == TIN || tok->type == TADDOUT || \
-	tok->type == TDOC || tok->type == TOUT) //뒤에있는 리다이렉션 프리 필요
+	tok->type == TDOC || tok->type == TOUT)
 	{
 		if (tok->fd_in != -1)
 			close_util(tok->fd_in, tok);

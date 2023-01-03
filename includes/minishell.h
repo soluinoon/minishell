@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ko <ko@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:24:01 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/29 23:28:17 by ko               ###   ########.fr       */
+/*   Updated: 2023/01/03 14:04:47 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 
 # include <sys/wait.h>
 
-
 # define SUCCESS	1
 # define FAIL		0
 
@@ -52,5 +51,8 @@ void	set_signal(int num);
 //loop
 int		run(char *line, t_info *info);
 void	loop(t_info *info);
+
+//main
+void	eof_exit(t_info *info);
 
 #endif

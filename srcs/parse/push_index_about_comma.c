@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_index_about_comma.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:08:14 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 19:00:08 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/03 13:48:46 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	count_space_out_of_comma(char *str)
 			while (str[i] == ' ')
 				i++;
 		}
-		else if (ft_is_redir(str[i])) //추가부분
+		else if (ft_is_redir(str[i]))
 		{
 			count++;
 			i++;

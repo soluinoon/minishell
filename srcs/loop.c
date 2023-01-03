@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 20:51:52 by kko               #+#    #+#             */
-/*   Updated: 2023/01/03 10:06:25 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/03 14:03:39 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_tok(t_token *tok)
 {
-	int i;
+	int	i;
 
 	while (tok)
 	{
@@ -40,9 +40,6 @@ void	print_tree(t_token *tok)
 	print_tree(tok->left);
 	print_tree(tok->right);
 }
-
-
-
 
 int	run(char *line, t_info *info)
 {
@@ -71,13 +68,6 @@ int	run(char *line, t_info *info)
 	run_shell(token);
 	free_tree(token);
 	return (info->exit_num);
-}
-
-void	eof_exit(t_info *info)
-{
-	printf("exit\n");
-	tcsetattr(STDIN_FILENO, TCSANOW, info->old_term);
-	exit(info->exit_num);
 }
 
 void	loop_set(t_info *info)
