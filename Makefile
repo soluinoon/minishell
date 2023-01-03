@@ -6,7 +6,7 @@
 #    By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 15:22:25 by seokchoi          #+#    #+#              #
-#    Updated: 2023/01/02 21:48:26 by jihonkim         ###   ########.fr        #
+#    Updated: 2023/01/03 10:31:26 by jihonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,12 +48,15 @@ all:		${NAME}
 
 .c.o:		${SRCS}
 #			${CC} $(CFLAGS) -I ${HEAD} -c $^ -o ${^:.c=.o}
-			${CC} $(CFLAGS) -I ${HEAD} -c $^ -o ${^:.c=.o} -I/Users/kko/.brew/opt/readline/include
+# ${CC} $(CFLAGS) -I ${HEAD} -c $^ -o ${^:.c=.o} -I/Users/kko/.brew/opt/readline/include
+			${CC} $(CFLAGS) -I ${HEAD} -c $^ -o ${^:.c=.o} -I/opt/homebrew/opt/readline/include
 
 ${NAME}:	${OBJS}
 			make -C ${LIBFT}/ 
 #			$(CC) $(CFLAGS) -I $(HEAD) -o $(NAME) ${OBJS} -L ./libft -lft -lreadline
-			$(CC) $(CFLAGS) -I $(HEAD) -o $(NAME) ${OBJS} -L/Users/kko/.brew/opt/readline/lib -lreadline  -L ./libft -lft
+# $(CC) $(CFLAGS) -I $(HEAD) -o $(NAME) ${OBJS} -L/Users/kko/.brew/opt/readline/lib -lreadline  -L ./libft -lft
+			$(CC) $(CFLAGS) -I $(HEAD) -o $(NAME) ${OBJS} -L/opt/homebrew/opt/readline/lib -lreadline  -L ./libft -lft
+
 
 clean:
 			make clean -C ${LIBFT}/
