@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:07:18 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/12 20:20:15 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/04 17:41:38 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ static void	update_pwd(t_token *token)
 
 static void	if_cd_home(t_token *token, char *home_path)
 {
-	if (chdir(home_path) == -1)
+	if (ft_strncmp(home_path, "", 1) == 0)
+	{
+		throw_error_message("cd", NULL, "HOME not set", 1);
+		token->info->exit_num = 1;
+	}
+	else if (chdir(home_path) == -1)
 	{
 		throw_error_message("cd", home_path, \
 		"No such file or directory", 1);
@@ -43,19 +48,18 @@ static void	if_cd_home(t_token *token, char *home_path)
 
 void	ft_cd(t_token *token)
 {
-	char		*home_path;
 	t_env_list	*env_list;
 
 	env_list = token->info->env_list;
-	home_path = ft_getenv(env_list, "HOME");
-	if (ft_strncmp(home_path, "", 1) == 0)
+	if (token->cmd[1])
 	{
-		throw_error_message("cd", NULL, "HOME not set", 1);
-		token->info->exit_num = 1;
-	}
-	else if (token->cmd[1])
-	{
-		if (chdir(token->cmd[1]) == -1)
+		if (ft_strncmp(ft_getenv(env_list, "HOME"), "", 1) == 0 && \
+		ft_strncmp(token->cmd[1], "", 1) == 0)
+		{
+			throw_error_message("cd", NULL, "HOME not set", 1);
+			token->info->exit_num = 1;
+		}
+		else if (chdir(token->cmd[1]) == -1)
 		{
 			throw_error_message("cd", token->cmd[1], \
 			"No such file or directory", 1);
@@ -65,7 +69,6 @@ void	ft_cd(t_token *token)
 			token->info->exit_num = 0;
 	}
 	else
-		if_cd_home(token, home_path);
+		if_cd_home(token, ft_getenv(env_list, "HOME"));
 	update_pwd(token);
-	free(home_path);
 }
