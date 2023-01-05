@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:53:13 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/11 21:33:01 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/05 12:19:19 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	ft_putenv(t_env_list *env_list, char *key, char *value, int equal)
 		{
 			free(tmp_a->value);
 			tmp_a->value = ft_strdup(value);
-			tmp_a->equal = equal;
 			if (!tmp_a->value)
 				throw_error(MALLOC_ERR);
+			tmp_a->equal = equal;
 			return ;
 		}
 		tmp_b = tmp_a;
