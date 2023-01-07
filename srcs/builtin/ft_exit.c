@@ -3,65 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 14:20:58 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/03 16:34:41 by jihonkim         ###   ########.fr       */
+/*   Created: 2023/01/06 12:21:00 by jihonkim          #+#    #+#             */
+/*   Updated: 2023/01/07 21:07:14 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	can_be_exit_num(char *num)
+static int	is_num(char *num)
 {
 	int	i;
-	int	flag;
 
-	flag = SUCCESS;
 	i = 0;
 	if (!num)
-		return (FAIL);
+		return (0);
 	while (num[i])
 	{
 		if (num[i] < '0' || num[i] > '9')
-			flag = FAIL;
+			return (0);
 		i++;
 	}
-	return (flag);
+	return (1);
 }
 
-void	ft_exit_with_print(t_token *tok)
+void	ft_exit_with_print(t_token *tok, char **cmd, \
+int number, int err_code)
 {
 	printf("exit\n");
+	if (err_code == 1)
+		throw_error_message("exit", cmd[1], "numeric argument required", 255);
 	tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
-	exit(tok->info->exit_num);
+	exit(number);
 }
 
 void	ft_exit(t_token *tok, char **cmd)
 {
 	if (cmd[1] == NULL)
-	{
-		ft_exit_with_print(tok);
-	}
-	else if (can_be_exit_num(cmd[1]) == 1)
+		ft_exit_with_print(tok, cmd, tok->info->exit_num, 0);
+	else if (is_num(cmd[1]))
 	{
 		if (cmd[2] != 0)
 		{
 			tok->info->exit_num = 1;
-			throw_error_message("exit", NULL, "too many arguments", 1);
+			throw_error_message("exit", NULL, "too many argument", 1);
 		}
 		else
-		{
-			printf("exit\n");
-			tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
-			exit(ft_atoi(cmd[1]));
-		}
+			ft_exit_with_print(tok, cmd, ft_atoi(cmd[1]), 0);
 	}
 	else
-	{
-		printf("exit\n");
-		throw_error_message("exit", cmd[1], "numeric argument required", 255);
-		tcsetattr(STDIN_FILENO, TCSANOW, tok->info->old_term);
-		exit(255);
-	}
+		ft_exit_with_print(tok, cmd, 255, 1);
 }

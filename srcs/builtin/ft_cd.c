@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 15:07:18 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/04 17:41:38 by jihonkim         ###   ########.fr       */
+/*   Created: 2023/01/06 16:22:22 by jihonkim          #+#    #+#             */
+/*   Updated: 2023/01/07 17:06:58 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	update_pwd(t_token *token)
 
 	env_list = token->info->env_list;
 	tmp = ft_calloc(4096, sizeof(char));
+	if (!tmp)
+		throw_error(MALLOC_ERR);
 	prev_pwd = ft_getenv(env_list, "PWD");
 	cur_pwd = getcwd(tmp, 4096);
 	ft_putenv(env_list, "PWD", cur_pwd, 0);
