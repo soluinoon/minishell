@@ -6,7 +6,7 @@
 /*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:21:00 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/07 17:07:26 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/07 21:07:14 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	is_num(char *num)
 	{
 		if (num[i] < '0' || num[i] > '9')
 			return (0);
+		i++;
 	}
 	return (1);
 }
