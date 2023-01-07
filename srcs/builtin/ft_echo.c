@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 20:42:08 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/12 20:13:13 by kko              ###   ########.fr       */
+/*   Created: 2023/01/05 15:03:34 by jihonkim          #+#    #+#             */
+/*   Updated: 2023/01/07 17:06:56 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,26 @@
 void	ft_echo(char **cmd, t_token *token)
 {
 	int	i;
-	int	n_flag;
+	int	newline_flag;
 
-	n_flag = 1;
 	i = 1;
-	if (cmd[1] && ft_strncmp(cmd[1], "-n", 3) == 0)
+	newline_flag = 1;
+	// echo -n 1 2 3
+	while (cmd[i] && ft_strncmp(cmd[i], "-n", 3) == 0)
 	{
-		n_flag = 0;
-		i = 2;
+		newline_flag = 0;
+		i++;
 	}
 	while (cmd[i])
 	{
 		printf("%s", cmd[i]);
 		i++;
 		if (cmd[i])
+		{
 			printf(" ");
+		}
 	}
-	if (n_flag)
+	if (newline_flag == 1)
 		printf("\n");
 	token->info->exit_num = 0;
 }

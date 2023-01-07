@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 23:14:05 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/02 20:22:07 by kko              ###   ########.fr       */
+/*   Created: 2023/01/05 14:52:04 by jihonkim          #+#    #+#             */
+/*   Updated: 2023/01/07 17:06:54 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void	ft_pwd(char **cmd)
 	char	*pwd;
 	char	*buf;
 
-	(void) cmd;
+	(void)cmd;
 	buf = ft_calloc(4096, 1);
 	if (!buf)
 		throw_error(MALLOC_ERR);
 	pwd = getcwd(buf, 4096);
+	if (!pwd)
+		throw_error(MALLOC_ERR);
 	printf("%s\n", pwd);
 	free(buf);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 23:33:15 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/12 20:33:06 by kko              ###   ########.fr       */
+/*   Created: 2023/01/06 15:12:03 by jihonkim          #+#    #+#             */
+/*   Updated: 2023/01/07 17:06:55 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,17 @@ static void	check_export_arg_right(t_token *token)
 void	ft_export(t_token *token)
 {
 	t_env_list	*env_list;
-	int			cmd_len;
-	char		**env;
+	int			cmd_size;
+	char		**env_arrs;
 
-	cmd_len = get_sec_arr_len(token->cmd);
+	cmd_size = get_sec_arr_len(token->cmd);
 	env_list = token->info->env_list;
-	if (cmd_len == 1)
+	if (cmd_size == 1)
 	{
-		env = get_export_arr(env_list);
-		sort_env(env, get_env_num(env_list));
-		print_export(env);
-		free_sec_arr(env);
+		env_arrs = get_export_arr(env_list);
+		sort_env(env_arrs, get_env_num(env_list));
+		print_export(env_arrs);
+		free_sec_arr(env_arrs);
 		token->info->exit_num = 0;
 		return ;
 	}

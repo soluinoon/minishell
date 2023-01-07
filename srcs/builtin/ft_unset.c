@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 23:33:26 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/12 20:30:29 by kko              ###   ########.fr       */
+/*   Created: 2023/01/05 16:14:33 by jihonkim          #+#    #+#             */
+/*   Updated: 2023/01/07 17:08:49 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,21 @@ void	ft_unset(t_token *token)
 	int		i;
 
 	i = 1;
+	token->info->exit_num = 0;
 	key = NULL;
 	value = NULL;
-	token->info->exit_num = 0;
 	while (token->cmd[i])
-	{	
+	{
 		ft_split_for_env(token->cmd[i], &key, &value);
 		if (is_dont_be_key(key) == FAIL)
 		{
 			token->info->exit_num = 1;
-			throw_error_message("unset", token->cmd[i], \
+			throw_error_message("unset", key, \
 			"not a valid identifier", 1);
 		}
 		else
-		{
 			ft_unset_env_list(&token->info->env_list, key);
-		}
-		key_value_free(&key, &value);
 		i++;
 	}
+	key_value_free(&key, &value);
 }
