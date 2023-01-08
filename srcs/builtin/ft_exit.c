@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:21:00 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/07 21:07:14 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/08 10:07:11 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_exit(t_token *tok, char **cmd)
 		if (cmd[2] != 0)
 		{
 			tok->info->exit_num = 1;
+			printf("exit\n");
 			throw_error_message("exit", NULL, "too many argument", 1);
 		}
 		else

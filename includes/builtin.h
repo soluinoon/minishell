@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 20:49:37 by seokchoi          #+#    #+#             */
-/*   Updated: 2023/01/07 17:08:04 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/08 11:15:49 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	ft_env(t_token *token);
 void	ft_exit_with_print(t_token *tok, char **cmd, \
 int number, int err_code);
 void	ft_exit(t_token *tok, char **cmd);
+char	**get_export_arr(t_env_list *env_list);
 
 #endif
