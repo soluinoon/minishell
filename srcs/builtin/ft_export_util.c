@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_util.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:31:59 by kko               #+#    #+#             */
-/*   Updated: 2023/01/07 18:21:06 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/08 10:07:38 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static int	has_value(t_env_list *env_list, char *key)
 		if (!ft_strncmp(key, tmp->key, ft_strlen(key) + 1))
 		{
 			if (tmp->equal == 0)
-				return 0;
+				return (0);
 		}
 		tmp = tmp->next;
 	}
-	return 1;
+	return (1);
 }
 
 void	check_export_util(t_token *token, int *flag, char **key, char **value)
 {
-	int fail_flag;
+	int	fail_flag;
 
 	fail_flag = 0;
 	if (*flag == SUCCESS)

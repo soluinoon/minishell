@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:03:34 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/07 17:06:56 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/08 10:07:09 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_echo(char **cmd, t_token *token)
 
 	i = 1;
 	newline_flag = 1;
-	// echo -n 1 2 3
 	while (cmd[i] && ft_strncmp(cmd[i], "-n", 3) == 0)
 	{
 		newline_flag = 0;
