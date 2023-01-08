@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jihonkim <jihonkim@42student.42seoul.kr    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:22:22 by jihonkim          #+#    #+#             */
-/*   Updated: 2023/01/07 17:06:58 by jihonkim         ###   ########.fr       */
+/*   Updated: 2023/01/08 14:13:41 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static void	if_cd_home(t_token *token, char *home_path)
 
 void	ft_cd(t_token *token)
 {
-	t_env_list	*env_list;
+	char		*tmp;
 
-	env_list = token->info->env_list;
+	tmp = ft_getenv(token->info->env_list, "HOME");
 	if (token->cmd[1])
 	{
-		if (ft_strncmp(ft_getenv(env_list, "HOME"), "", 1) == 0 && \
+		if (ft_strncmp(tmp, "", 1) == 0 && \
 		ft_strncmp(token->cmd[1], "", 1) == 0)
 		{
 			throw_error_message("cd", NULL, "HOME not set", 1);
@@ -71,6 +71,7 @@ void	ft_cd(t_token *token)
 			token->info->exit_num = 0;
 	}
 	else
-		if_cd_home(token, ft_getenv(env_list, "HOME"));
+		if_cd_home(token, tmp);
+	free(tmp);
 	update_pwd(token);
 }

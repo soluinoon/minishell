@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_wave.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kko <kko@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:45:49 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/09 00:08:28 by kko              ###   ########.fr       */
+/*   Updated: 2023/01/08 13:36:18 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	if_only_wave(t_token **token, char **arr, int *right)
 	if (ft_strncmp(*arr, "~", 2) == 0)
 	{
 		free(*arr);
-		*arr = ft_strdup(ft_getenv((*token)->info->env_list, "~"));
+		*arr = ft_getenv((*token)->info->env_list, "~");
 		if (!(*arr))
 			throw_error(MALLOC_ERR);
 		while (line[(*right)] == ' ')

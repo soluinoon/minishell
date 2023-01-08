@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kko <kko@student.42.fr>                    +#+  +:+       +#+         #
+#    By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:10:22 by seokchoi          #+#    #+#              #
-#    Updated: 2022/12/30 09:54:25 by kko              ###   ########.fr        #
+#    Updated: 2023/01/08 13:12:57 by jihonkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRCS_BONUS	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_b
 OBJS	= ${SRCS:.c=.o}
 OBJS_BONUS	= ${SRCS_BONUS:.c=.o}
 CC		= cc
-#CC		= clang-12
 CFLAGS	= -Wall -Werror -Wextra
 NAME    = libft.a
 
