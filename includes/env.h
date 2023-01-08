@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seokchoi <seokchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jihonkim <gidrlantk@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 20:12:18 by seokchoi          #+#    #+#             */
-/*   Updated: 2022/12/11 04:25:43 by seokchoi         ###   ########.fr       */
+/*   Updated: 2023/01/08 11:17:47 by jihonkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void		free_keys(t_keys *keys);
 // env_arr
 int			get_env_num(t_env_list *env_list);
 char		**get_env_arr(t_env_list *env_list);
-char		**get_export_arr(t_env_list *env_list);
 
 // env
 void		init_env(t_info *info, char **envp);
